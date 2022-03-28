@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: customer
+  template:
+    metadata:
+      labels:
+        app: customer
+    spec:
+      containers:
+      - name: customer
+        image: "getbharat/customer:latest"
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8090
+          name: app
+        - containerPort: 8000
+          name: debug  
+        env:
+          - name: ORDER_SERVICE
+            value: "order"
+          - name: "JAVA_OPTS"
+            value: "-agentlib:jdwp=server=y,transport=dt_socket,address=*:8000,suspend=n"
+

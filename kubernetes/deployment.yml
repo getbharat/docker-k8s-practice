@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-d
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-world-d
+  template:
+    metadata:
+      labels:
+        app: hello-world-d
+    spec:
+      containers:
+      - name: hello-world-d
+        image: getbharat/spring-boot-docker-example
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8081

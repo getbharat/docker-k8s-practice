@@ -1,0 +1,17 @@
+version: '3'
+services:
+  instance:
+   image: mysql
+   volumes:
+     - mysql-data:/var/lib/mysql
+   environment:
+   - MYSQL_ROOT_PASSWORD=admin@123
+   - MYSQL_PASSWORD=admin
+   - MYSQL_DATABASE=demo
+   ports:
+     - 3306:3306
+
+volumes:
+  mysql-data:
+
+# login to container and execute => mysql -u -root -padmin@123
